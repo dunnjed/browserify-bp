@@ -9,6 +9,7 @@ var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash.assign');
 var uglify = require('gulp-uglify');
+var tsify = require('tsify');
 
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
@@ -19,7 +20,7 @@ var customOpts = {
   debug: true
 };
 var opts = assign({}, watchify.args, customOpts);
-var b = watchify(browserify(opts)); 
+var b = watchify(browserify(opts).plugin('tsify', {noImplicitAny: true})); 
 
 // add transformations here
 // i.e. b.transform(coffeeify);
